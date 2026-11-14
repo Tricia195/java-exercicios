@@ -1,0 +1,82 @@
+import java.util.Scanner;
+
+public class Main
+{
+    public static void temperaturas() {
+        float[][] temperatura = new float[10][3];
+        Scanner teclado = new Scanner(System.in);
+        
+        int opcao = 0;
+        
+        for(var x=0; x<10; x++){
+            System.out.println("Informe a temperatura minima do dia "+ (x+1)+":");
+            temperatura[x][0] = teclado.nextFloat();
+            
+             System.out.println("Informe a temperatura máxima do dia: "+ (x+1)+":");
+            temperatura[x][1] = teclado.nextFloat();
+            
+            temperatura[x][2] = (temperatura[x][0]+temperatura[x][1])/2;
+        }
+        
+        do {
+
+            System.out.println("\n----- MENU -----");
+            System.out.println("1 - Temperatura minima de todos os dias");
+            System.out.println("2 - Temperatura maxima de todos os dias");
+            System.out.println("3 - Maior variacao de temperatura");
+            System.out.println("4 - Sair do programa");
+            System.out.println("Escolha uma opcao:");
+
+            opcao = teclado.nextInt();
+
+            switch (opcao) {
+                case 1:
+                    for (var x = 0; x < 10; x++) {
+                        System.out.println("Dia " + (x+1) + ": " + temperatura[x][0]);
+                    }
+                    break;
+
+                case 2:
+                    for (var x = 0; x < 10; x++) {
+                        System.out.println("Dia " + (x+1) + ": " + temperatura[x][1]);
+                    }
+                    break;
+                    
+                 case 3:
+                    float maiorVariacao = temperatura[0][1] - temperatura[0][0];
+                    int dia = 1;
+
+                    for (var x = 1; x < 10; x++) {
+
+                        float variacao = temperatura[x][1] - temperatura[x][0];
+
+                        if (variacao > maiorVariacao) {
+                            maiorVariacao = variacao;
+                            dia = x + 1;
+                        }
+                    }
+                    System.out.println("Maior variacao: " + maiorVariacao);
+                    System.out.println("Dia: " + dia);
+                    break;
+                    
+                case 4:
+                    System.out.println("Programa encerrado!");
+                    break;
+
+                default:
+                    System.out.println("Opcao invalida!");
+                    
+            }
+            
+        } while (opcao != 4);
+        teclado.close();
+    }
+    
+    
+    
+    
+    
+	public static void main(String[] args) {
+		temperaturas();
+	}
+}
