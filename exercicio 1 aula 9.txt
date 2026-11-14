@@ -72,11 +72,72 @@ public class Main
         teclado.close();
     }
     
-    
+    public static void calculaTriangulo() {
+
+        float[][] triangulo = new float[10][3];
+        Scanner teclado = new Scanner(System.in);
+
+        int equilatero = 0;
+        int isosceles = 0;
+        int escaleno = 0;
+        int invalido = 0;
+
+        // Cadastro das arestas
+        for (var x = 0; x < 10; x++) {
+
+            System.out.println("Informe a primeira aresta do triangulo " + (x+1) + ":");
+            triangulo[x][0] = teclado.nextFloat();
+
+            System.out.println("Informe a segunda aresta do triangulo " + (x+1) + ":");
+            triangulo[x][1] = teclado.nextFloat();
+
+            System.out.println("Informe a terceira aresta do triangulo " + (x+1) + ":");
+            triangulo[x][2] = teclado.nextFloat();
+
+            // Verificacao e classificacao
+            if (triangulo[x][0] <= 0 || triangulo[x][1] <= 0 || triangulo[x][2] <= 0 ||
+                triangulo[x][0] + triangulo[x][1] <= triangulo[x][2] ||
+                triangulo[x][0] + triangulo[x][2] <= triangulo[x][1] ||
+                triangulo[x][1] + triangulo[x][2] <= triangulo[x][0]) {
+
+                invalido++;
+
+            } else if (triangulo[x][0] == triangulo[x][1] &&
+                       triangulo[x][1] == triangulo[x][2]) {
+
+                equilatero++;
+
+            } else if (triangulo[x][0] == triangulo[x][1] ||
+                       triangulo[x][0] == triangulo[x][2] ||
+                       triangulo[x][1] == triangulo[x][2]) {
+
+                isosceles++;
+
+            } else {
+
+                escaleno++;
+            }
+        }
+
+        // Calculo dos percentuais
+        System.out.println("\n----- RESULTADO -----");
+
+        System.out.println("Percentual de triangulos equilateros: " + (equilatero * 10) + "%");
+
+        System.out.println("Percentual de triangulos isosceles: " + (isosceles * 10) + "%");
+
+        System.out.println("Percentual de triangulos escalenos: " + (escaleno * 10) + "%");
+
+        System.out.println("Triangulos invalidos: " + invalido);
+
+        teclado.close();
+    }
+
     
     
     
 	public static void main(String[] args) {
 		temperaturas();
+		calculaTriangulo();
 	}
 }
